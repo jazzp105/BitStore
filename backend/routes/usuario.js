@@ -1,17 +1,18 @@
-//variable express
-let express=require("express");
+// Variable express
+let express = require("express");
+// Importamos el controlador de usaurio
+let Usuario = require("../controllers/usuario");
 
-//importamos el controlador
+// Creamos la api
+let api = express.Router();
 
-let Usuario=require("../controllers/usuario");
-
-//creamos la api
-
-let api=express.Router();
-
-//servicio POST (REGISTRAR)
-
+// Servicio POST (registrar)   http://localhost:3001/api/registrarUsuario
 api.post("/registrarUsuario", Usuario.registrarUsuario);
-// Servicio para el login
-api.post("/login",Usuario.login);
-module.exports=api;
+api.post("/login", Usuario.login);
+api.get("/usuario", Usuario.listarUsuario);
+api.put("/usuario/editarUsuario/:id", Usuario.editarUsuario);
+api.get("/usuario/:id", Usuario.obtenerUsuario);
+api.delete("/usuario/eliminarUsuario/:id", Usuario.eliminarUsuario);
+
+// Exportamos el modulo
+module.exports = api;
